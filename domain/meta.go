@@ -2,20 +2,29 @@ package domain
 
 import "time"
 
+var NowUTC = func() time.Time { return time.Now().UTC().Round(0) }
+
 type Meta struct {
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	IsVoid    time.Time
+	CreatedAt time.Time  `json:"createdAt"`
+	UpdatedAt *time.Time `json:"updatedAt"`
+	IsVoid    *time.Time `json:"isVoid"`
 }
 
-func (m *Meta) Create() {
-	m.CreatedAt = time.Now()
+func CreateMeta() Meta {
+	t := NowUTC()
+	return Meta{
+		CreatedAt: t,
+		UpdatedAt: nil,
+		IsVoid:    nil,
+	}
 }
 
 func (m *Meta) Update() {
-	m.UpdatedAt = time.Now()
+	t := NowUTC()
+	m.UpdatedAt = &t
 }
 
 func (m *Meta) Delete() {
-	m.IsVoid = time.Now()
+	t := NowUTC()
+	m.IsVoid = &t
 }

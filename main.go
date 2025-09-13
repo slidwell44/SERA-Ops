@@ -1,13 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
+import "sera/ops/domain"
 
 func main() {
-	var message string = Hello("Simon")
-	fmt.Println(message)
-}
-
-func Hello(name string) string {
-	message := fmt.Sprintf("Hi, %v. Welcome!", name)
-	return message
+	meta := domain.CreateMeta()
+	b, err := json.MarshalIndent(meta, "", "  ")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(b))
 }
