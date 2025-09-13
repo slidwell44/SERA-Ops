@@ -2,6 +2,6 @@ package domain
 
 type Operation struct {
 	Meta
-	Id   string
+	Id   int64
 	Name string
 }
